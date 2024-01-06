@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "Gess";
+    src: url("fonts/GE_SS_Text_Light.woff") format("woff"),
+        url("fonts/GE_SS_Text_Light.ttf") format("truetype"),
+        url("fonts/GE_SS_Text_Light.eot")
+}
