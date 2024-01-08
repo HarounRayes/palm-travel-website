@@ -16,7 +16,9 @@
             </div>
         </div>
     </div>
-    <form action="{{route('packages')}}" class="form-inline packages-container" method="get" id='search-form'>
+    <form action="{{route('packages')}}" class="form-inline packages-container" method="get" id='search-form'
+    style="background: #494C53;background-image: url({{url('storage/app/public/images/country/'.$country->background_image) }}) ;
+        background-repeat: no-repeat;background-size: 100% 100% ;background-position: center;">
 
     @include('frontend.blocks.searchForm')
     <div class="home-area-1 recent-property" style="padding-bottom: 55px;">

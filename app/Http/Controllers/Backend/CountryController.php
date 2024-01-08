@@ -71,6 +71,20 @@ class CountryController extends Controller
             $request->header_image_ar->storeAs($this->imagePath, $imageName);
             $dataUp['header_image_ar'] = $imageName;
         }
+
+        if ($request->has('background_image_en') != null) {
+            $imageName = time() . '.countryheaderimageen' . $country->id . '.' . $request->background_image_en->getClientOriginalExtension();
+            $request->background_image_en->storeAs($this->imagePath, $imageName);
+            $dataUp['background_image_en'] = $imageName;
+        }
+
+        if ($request->has('background_image_ar') != null) {
+            $imageName = time() . '.countryheaderimagear' . $country->id . '.' . $request->background_image_ar->getClientOriginalExtension();
+            $request->background_image_ar->storeAs($this->imagePath, $imageName);
+            $dataUp['background_image_ar'] = $imageName;
+        }
+
+
         $country->update($dataUp);
         return redirect()->route('admin.countries.index');
     }
@@ -130,6 +144,25 @@ class CountryController extends Controller
             $request->header_image_ar->storeAs($this->imagePath, $imageName);
             $dataUp['header_image_ar'] = $imageName;
         }
+
+        if ($request->has('background_image_en') != null) {
+            if (File::exists(storage_path('/public/images/country/' . $country->background_image_en))) {
+                File::delete(storage_path('/public/images/country/' . $country->background_image_en));
+            }
+            $imageName = time() . '.countryheaderimageen' . $country->id . '.' . $request->background_image_en->getClientOriginalExtension();
+            $request->background_image_en->storeAs($this->imagePath, $imageName);
+            $dataUp['background_image_en'] = $imageName;
+        }
+
+        if ($request->has('background_image_ar') != null) {
+            if (File::exists(storage_path('/public/images/country/' . $country->background_image_ar))) {
+                File::delete(storage_path('/public/images/country/' . $country->background_image_ar));
+            }
+            $imageName = time() . '.countryheaderimagear' . $country->id . '.' . $request->background_image_ar->getClientOriginalExtension();
+            $request->background_image_ar->storeAs($this->imagePath, $imageName);
+            $dataUp['background_image_ar'] = $imageName;
+        }
+
         $country->update($dataUp);
 
         return redirect()->route('admin.countries.index');

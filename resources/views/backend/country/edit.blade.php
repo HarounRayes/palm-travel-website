@@ -216,6 +216,21 @@
                                                              src="{{ url('storage/app/public/images/country/'.$country->header_image_en) }}"/>
                                                     @endif
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="beexampleInputFile">Background Image</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                   id="beexampleInputFile" name="background_image_en">
+                                                            <label class="custom-file-label" for="beexampleInputFile">Choose
+                                                                file</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($country->background_image_en))
+                                                        <img style="width: 100px;"
+                                                             src="{{ url('storage/app/public/images/country/'.$country->background_image_en) }}"/>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
@@ -287,6 +302,20 @@
                                                     @if(isset($country->header_image_ar))
                                                         <img style="width: 100px;"
                                                              src="{{ url('storage/app/public/images/country/'.$country->header_image_ar) }}"/>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="baexampleInputFile">صورة الخلفية</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                   id="baexampleInputFile" name="background_image_ar">
+                                                            <label class="custom-file-label" for="baexampleInputFile">اختر ملف</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($country->background_image_ar))
+                                                        <img style="width: 100px;"
+                                                             src="{{ url('storage/app/public/images/country/'.$country->background_image_ar) }}"/>
                                                     @endif
                                                 </div>
                                             </div>

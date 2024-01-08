@@ -177,6 +177,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="beexampleInputFile">Background Image</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                   id="beexampleInputFile" name="background_image_en">
+                                                            <label class="custom-file-label" for="beexampleInputFile">Choose
+                                                                file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
@@ -239,6 +250,16 @@
                                                                    id="exampleInputFile" name="header_image_ar">
                                                             <label class="custom-file-label" for="exampleInputFile">Choose
                                                                 file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="baexampleInputFile">صورة الخلفية</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                   id="baexampleInputFile" name="background_image_ar">
+                                                            <label class="custom-file-label" for="baexampleInputFile">اختر الملف</label>
                                                         </div>
                                                     </div>
                                                 </div>

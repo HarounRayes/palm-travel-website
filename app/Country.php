@@ -25,6 +25,7 @@ class Country extends LocalizableModel
         'visa_info_en', 'visa_info_ar',
         'image_en', 'image_ar',
         'header_image_en', 'header_image_ar',
+        'background_image_en', 'background_image_ar',
         'intro_en', 'intro_ar',
         'flag', 'start_price', 'color_label',
         'symbol', 'country_order','add_to_home',
@@ -39,7 +40,8 @@ class Country extends LocalizableModel
         'visa_info',
         'image',
         'header_image',
-        'intro'
+        'intro',
+        'background_image'
     ];
 
     protected static function booted()
