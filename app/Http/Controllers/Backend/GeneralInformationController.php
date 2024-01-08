@@ -130,6 +130,27 @@ class GeneralInformationController extends Controller
             $request->header_image_ar->storeAs($this->imagePathInfo, $imageName);
             $dataUp['header_image_ar'] = $imageName;
         }
+
+
+        if ($request->has('background_image_en') != null) {
+            if (File::exists(storage_path($this->imagePathInfo . $info->background_image_en))) {
+                File::delete(storage_path($this->imagePathInfo . $info->background_image_en));
+            }
+            $imageName = time() . '.visainfoheaderimageen' . $info->id . '.' . $request->background_image_en->getClientOriginalExtension();
+            $request->background_image_en->storeAs($this->imagePathInfo, $imageName);
+            $dataUp['background_image_en'] = $imageName;
+        }
+
+        if ($request->has('background_image_ar') != null) {
+            if (File::exists(storage_path($this->imagePathInfo . $info->background_image_ar))) {
+                File::delete(storage_path($this->imagePathInfo . $info->background_image_ar));
+            }
+            $imageName = time() . '.visainfoheaderimagear' . $info->id . '.' . $request->background_image_ar->getClientOriginalExtension();
+            $request->background_image_ar->storeAs($this->imagePathInfo, $imageName);
+            $dataUp['background_image_ar'] = $imageName;
+        }
+
+
         $info->update($dataUp);
         return redirect()->route('admin.packages.info');
     }

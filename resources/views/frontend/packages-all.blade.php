@@ -11,7 +11,13 @@
         <div class="page-head" style="background-color: #b0a579;">
         </div>
     @endif
-    <div class=" country-container">
+    <div class="country-container" 
+        style="
+            background-image: url({{url('storage/app/public/images/info/'.$info->background_image)}});
+            background-size: cover;
+            background-position: center;"
+            >
+
         <form action="{{route('packages')}}" class="form-inline" method="get" id='search-form'>
             @include('frontend.blocks.searchForm')
         </form>
@@ -90,4 +96,12 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .country-container {
+            background: url();
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
 @endsection
