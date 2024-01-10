@@ -15,7 +15,7 @@
                 </a>
             </li>
         @endif
-        @if($package->flights && $package->flight === true && $package->flights->count() > 0)
+        @if($package->flights && $package->flight === "1" && $package->flights->count() > 0)
             <li>
                 <a class="" href="#tab5primary" >
                     <i class="fas fa-fighter-jet"></i>

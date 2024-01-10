@@ -21,7 +21,7 @@
         </div>
     </div>
 @endif
-@if ($package->flights && $package->flight === true && $package->flights->count() > 0)
+@if ($package->flights && $package->flight === "1" && $package->flights->count() > 0)
     <div class="package-details-box" id="tab5primary">
         <div class="panel-body recent-property-widget">
             <h4 class="s-property-title">
