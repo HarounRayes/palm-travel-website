@@ -153,8 +153,7 @@ class HomeController extends Controller
             'price_to' => $price_to,
             'date_from' => $date_from,
             'date_to' => $date_to,
-            'whatsapp' => $whatsapp
-        ]);
+            'whatsapp' => $whatsapp]);
     }
 
     public function details(Request $request, $symbol, $hotel)

@@ -21,7 +21,7 @@
         </div>
     </div>
 @endif
-@if ($package->flights)
+@if ($package->flights && $package->flight === true && $package->flights->count() > 0)
     <div class="package-details-box" id="tab5primary">
         <div class="panel-body recent-property-widget">
             <h4 class="s-property-title">
@@ -29,11 +29,9 @@
             </h4>
             @include('frontend.blocks._flight')
         </div>
-
     </div>
-
 @endif
-@if ($package->transfers)
+@if ($package->transfers && $package->transfers->count() > 0)
     <div class="package-details-box" id="tab11primary">
         <div class="panel-body recent-property-widget">
             <h4 class="s-property-title">
@@ -43,21 +41,21 @@
         </div>
     </div>
 @endif
-@if ($package->inclusions)
+@if ($package->inclusions && $package->inclusions->count() > 0)
     <div class="package-details-box active in" id="tab3primary">
         <div class="section">
             @include('frontend.blocks.in')
         </div>
     </div>
 @endif
-@if ($package->exclusions)
+@if ($package->exclusions && $package->exclusions->count() > 0)
     <div class="package-details-box active in" id="tab9primary">
         <div class="section">
             @include('frontend.blocks.out')
         </div>
     </div>
 @endif
-@if ($package->days)
+@if ($package->days && $package->days->count() > 0)
     <div class="package-details-box" id="tab6primary">
         <div class="section">
             <h4 class="s-property-title">

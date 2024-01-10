@@ -15,7 +15,7 @@
                 </a>
             </li>
         @endif
-        @if($package->flights)
+        @if($package->flights && $package->flight === true && $package->flights->count() > 0)
             <li>
                 <a class="" href="#tab5primary" >
                     <i class="fas fa-fighter-jet"></i>
@@ -24,7 +24,7 @@
                 </a>
             </li>
         @endif
-        @if ($package->transfers)
+        @if ($package->transfers && $package->transfers->count() > 0)
             <li>
                 <a class="" href="#tab11primary" >
                     <i class="fa fa-bus"></i>
@@ -33,7 +33,7 @@
                 </a>
             </li>
         @endif
-        @if ($package->inclusions)
+        @if ($package->inclusions && $package->inclusions->count() > 0)
             <li>
                 <a class="" href="#tab3primary" >
                     <i class="fas fa-th-list">
@@ -43,7 +43,7 @@
                 </a>
             </li>
         @endif
-        @if ($package->exclusions)
+        @if ($package->exclusions && $package->exclusions->count() > 0)
             <li>
                 <a class="" href="#tab9primary" >
                     <i class="fas fa-th-list">
@@ -54,7 +54,7 @@
             </li>
         @endif
 
-        @if($package->days)
+        @if($package->days && $package->days->count() > 0)
             <li>
                 <a class="" href="#tab6primary" >
                     <i class="fas fa-suitcase">
