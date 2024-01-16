@@ -150,7 +150,6 @@ class GeneralInformationController extends Controller
             $dataUp['background_image_ar'] = $imageName;
         }
 
-
         $info->update($dataUp);
         return redirect()->route('admin.packages.info');
     }

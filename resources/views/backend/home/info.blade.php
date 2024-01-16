@@ -82,35 +82,6 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane" id="custom-tabs-four-profile" role="tabpanel"
-                                         aria-labelledby="custom-tabs-four-home-tab">
-                                        <div class="col-md-4" style="float: left;height: 100px"></div>
-                                        <div class="col-md-8" style="direction: rtl;text-align: right;float: left">
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">صورة الهيدر</label>
-                                                <div class="input-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input"
-                                                               id="exampleInputFile" name="header_image_ar">
-                                                        <label class="custom-file-label" for="exampleInputFile">Choose
-                                                            file</label>
-                                                    </div>
-                                                </div>
-                                                @if(isset($info->header_image_ar))
-                                                    <img style="width: 100px;"
-                                                         src="{{ url('storage/app/public/images/info/'.$info->header_image_ar) }}"/>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="tab-content" id="custom-tabs-four-tabContent">
-
-                                    <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
-                                         aria-labelledby="custom-tabs-four-home-tab">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="bexampleInputFile">Background Image</label>
@@ -134,6 +105,24 @@
                                         <div class="col-md-4" style="float: left;height: 100px"></div>
                                         <div class="col-md-8" style="direction: rtl;text-align: right;float: left">
                                             <div class="form-group">
+                                                <label for="exampleInputFile">صورة الهيدر</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input"
+                                                               id="exampleInputFile" name="header_image_ar">
+                                                        <label class="custom-file-label" for="exampleInputFile">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
+                                                @if(isset($info->header_image_ar))
+                                                    <img style="width: 100px;"
+                                                         src="{{ url('storage/app/public/images/info/'.$info->header_image_ar) }}"/>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8" style="direction: rtl;text-align: right;float: left">
+                                            <div class="form-group">
                                                 <label for="exampleInputFile">صورة الخلفية</label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
@@ -151,9 +140,9 @@
                                         </div>
 
                                     </div>
-
                                 </div>
 
+                        
                             </div>
                             <!-- /.card -->
                         </div>
