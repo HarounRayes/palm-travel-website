@@ -36,11 +36,17 @@
                     @endif
                 </div>
                 <div id="view-packages-area">
-                    @foreach($packages as $package)
-                            <div class="col-sm-6 col-md-4 package-block {{$package->date}}" id="id1">
-                                @include('frontend.blocks.mainPackage')
-                            </div>
-                    @endforeach
+                    @if(count($packages) === 0)
+                    <center>
+                        <img src="{{asset('img/empty_list_animation.gif')}}" width="200" alt="gif empty animation">
+                    </center>
+                    @else
+                        @foreach($packages as $package)
+                                <div class="col-sm-6 col-md-4 package-block {{$package->date}}" id="id1">
+                                    @include('frontend.blocks.mainPackage')
+                                </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

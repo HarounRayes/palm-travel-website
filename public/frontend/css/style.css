@@ -2196,8 +2196,15 @@ ul.package-info li span:first-child::after {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-top: 5px;
+    padding: 10px;
 }
+
+.transfer-box-details .fltDtls{
+    display: flex;
+    gap: 5px;
+}
+
+
 .transfer-box div{
     background-color: #fff;
     font-weight: bold;

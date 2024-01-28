@@ -32,16 +32,18 @@
     </div>
 @endif
 @if($hotelPricings)
-<table class="table table-responsive table-active table-hover">
-  <tbody>
-    <tr>
-        @foreach($hotelPricings as $hotelPricing)
-      <td scope="row" class="table-light"> {{$hotelPricing->cost}}</td>
-     <td scope="row" class="bg-success"> {{$hotelPricing->value." ".trans('messages.this_currency')}}</td>
-    </tr>
-    
-   @endforeach
-    
-  </tbody>
+<table class="table table-striped table-hover border" style="border: 2px solid rgba(128, 128, 128, 0.178)">
+  <thead class="thead-dark bg-primary">
+    <th>###</th>
+    <th>$</th>
+  </thead>
+    <tbody>
+      @foreach($hotelPricings as $hotelPricing)
+        <tr>
+          <td scope="row" class="table-light"> {{$hotelPricing->cost}}</td>
+          <td scope="row" class=""> {{$hotelPricing->value." ".trans('messages.this_currency')}}</td>
+        </tr>
+      @endforeach
+    </tbody>
 </table>
 @endif

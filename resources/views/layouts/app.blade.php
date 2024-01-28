@@ -50,6 +50,7 @@
     <!-- Styles -->
     <link href="{{ asset('frontend/'. app()->getLocale() .'/bootstrap/css/bootstrap.css') }}"
           rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{asset('backend/login/css/bootstrap.min.css')}}"> --}}
     <link href="{{ asset('frontend/css/normalize.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/fontello.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/fonts/icon-7-stroke/css/pe-icon-7-stroke.css') }}" rel="stylesheet">
