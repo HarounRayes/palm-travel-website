@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['middleware' => 'language_api'], function () {
 
+    Route::get('/home/data', 'Api\HomeController@getHomeData');
+    
+
     Route::get('/sliders', 'Api\HomeController@get_sliders');
     Route::get('/services', 'Api\HomeController@get_services');
     Route::get('/partners', 'Api\HomeController@get_partners');

@@ -28,11 +28,15 @@ class AuthController extends Controller
                 "status" => 422
             ];
             throw new HttpResponseException(response()->json(
-                $data, 422));
+                $data, 422),);
         }
+
+        // return response()->json(Member::where('email', $request->email), 200);
+    
         if (!auth()->attempt($loginData)) {
-            return response(['message' => 'Invalid Credentials']);
+            return response() ->json(['message' => 'Invalid Credentials'], 401);
         }
+
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
         return response(['user' => auth()->user(), 'token' => $accessToken]);
     }

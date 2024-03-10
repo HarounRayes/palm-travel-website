@@ -7,8 +7,9 @@ namespace App\Http\Controllers\Api;
 use App\Country;
 use App\Enquiry;
 use App\GeneralInformation;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Country\CountryResource;
+use App\Http\Resources\Country\ListCountryResource;
 use App\Http\Resources\Country\HomeCountryResource;
 use App\Http\Resources\HomePage\PartnerResources;
 use App\Http\Resources\HomePage\ServiceResources;
@@ -23,8 +24,33 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class HomeController extends Controller
+class HomeController extends ApiController
 {
+
+    public function getHomeData(){
+        $sliders = Slider::orderBy('id', 'DESC')->get();
+        $partners = Partner::all();
+        $services = Service::all();
+        $countries = Country::WhereHas('packagesHome')->where('add_to_home', 1)->orderBy('country_order', 'ASC')->get();
+
+        try {
+
+            return  $this->respondWithSuccess(
+                [
+                    'silders' => $sliders,
+                    'partners' => $partners,
+                    'services' => $services,
+                    'countries' => new ListCountryResource($countries),
+                ],
+                "Data is returned successfully", 
+                200
+            );
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
+    }
+
     public function get_sliders()
     {
         $sliders = Slider::orderBy('id', 'DESC')->get();
