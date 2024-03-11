@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
+
 class ListActivityResource extends ResourceCollection
 {
     public function toArray($request)
@@ -15,7 +16,7 @@ class ListActivityResource extends ResourceCollection
         return [
             'data' => $this->collection->map(function ($data) {
                 if ($data->image != '') {
-                    $image = url('storage/app/public/images/package', $data->image);
+                    $image = url('storage/app/public/images/activity', $data->image);
                 } else {
                     $image = '';
                 }
@@ -24,13 +25,11 @@ class ListActivityResource extends ResourceCollection
                     'name' => $data->name,
                     'symbol' => $data->symbol,
                     'image' => $image,
-                    'labels' => PackageLabelResource::collection($data->labels),
+                    'price' => $data->price,
                     'flight' => $data->flight ? 1 : 0,
                     'hotels' => $data->hotels ? 1 : 0,
                     'transfer' => $data->transfer ? 1 : 0,
                     'activity' => $data->activity ? 1 : 0,
-                    'package_hotels' => PackageHotelResource::collection($data->packageHotels),
-
                 ];
 
             })

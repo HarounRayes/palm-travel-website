@@ -9,29 +9,30 @@ use App\ActivityCountry;
 use App\ActivityStep;
 use App\ActivityTour;
 use App\ActivityType;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Activity\CountryResource;
 use App\Http\Resources\Activity\ListActivityResource;
 use App\Http\Resources\NameResource;
 use App\Http\Resources\Activity\StepResource;
 use Illuminate\Http\Request;
 
-class ActivityController extends Controller
+class ActivityController extends ApiController
 {
     public function index(Request $request)
     {
-        $query = new ActivityTour();
 
+        $query = new ActivityTour();
+        
         if (isset($request->country_id) && $request->country_id != '')
             $query->where('activity_country_id', $request->country_id);
-
+    
         if (isset($request->city_id))
             $query->where('activity_city_id', $request->city_id);
 
         if (isset($request->category) && $request->category != '') {
             $query->whereHas('categories', function ($q) use ($request) {
                 $q->where('activity_category_id', $request->category);
-
+                
                 if (isset($request->service) && $request->service != '') {
                     $q->where('activity_tour_categories.type', $request->service);
                 }
@@ -41,6 +42,8 @@ class ActivityController extends Controller
                 $q->where('activity_tour_categories.type', $request->service);
             });
         }
+
+
 
         if (isset($request->duration) && $request->duration != '')
             $query->where('activity_duration', $request->duration);
@@ -58,11 +61,10 @@ class ActivityController extends Controller
         if (isset($request->is_home) && $request->is_home)
             $query->Home();
 
+        
         try {
             $results = $query->Publish()->paginate(10);
-
             return new ListActivityResource($results);
-
         } catch (\Exception $e) {
             throw $e;
         }
