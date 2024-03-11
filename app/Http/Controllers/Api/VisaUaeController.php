@@ -4,10 +4,11 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Visa\NationalityResource;
+use App\Http\Controllers\Api\ApiController;
+// use App\Http\Resources\Visa\NationalityResource;
 use App\Http\Resources\Visa\NationalityTypeFormResource;
 use App\Http\Resources\Visa\NationalityTypeResource;
+use App\Http\Resources\Visa\ListVisaNationalityResource;
 use App\Http\Resources\Visa\TypeResource;
 use App\VisaUaeNationality;
 use App\VisaUaeNationalityType;
@@ -17,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class VisaUaeController extends Controller
+class VisaUaeController extends ApiController
 {
     public function get_types()
     {
@@ -35,11 +36,15 @@ class VisaUaeController extends Controller
     }
     public function get_nationalities()
     {
+        // $query = ;
         try {
+
+            return new ListVisaNationalityResource(VisaUaeNationality::paginate(10));
+
             return response()->json([
                 "success" => true,
                 "message" => "",
-                "data" => NationalityResource::collection(VisaUaeNationality::Home()->get()),
+                "data" => new ListVisaNationalityResource($query),
                 "total" => 1,
                 "status" => 200
             ]);
@@ -70,8 +75,12 @@ class VisaUaeController extends Controller
             throw new HttpResponseException(response()->json(
                 $data, 422));
         }
-
-        $visa_uae_nationality_types = VisaUaeNationalityType::where('visa_uae_type_id', $dataIn['type_id'])->where('visa_uae_nationality_id', $dataIn['nationality_id'])->first();
+        
+        $visa_uae_nationality_types = VisaUaeNationalityType::where('visa_uae_type_id', $request->type_id)
+            ->where('visa_uae_nationality_id', $request->nationality_id)
+            ->first();
+        
+        return response()->json($visa_uae_nationality_types, 200);
 
         return response()->json([
             "success" => true,
