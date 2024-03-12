@@ -9,6 +9,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -31,14 +32,25 @@ class AuthController extends Controller
                 $data, 422),);
         }
 
-        // return response()->json(Member::where('email', $request->email), 200);
-    
-        if (!auth()->attempt($loginData)) {
+        $user = Member::where('email', $loginData['email'])->first();
+        
+        if (!($user)) {
+            return response() ->json(['message' => 'Invalid Email address'], 401);
+        }
+        
+        if (!Hash::check($loginData['password'], $user->password)) {
+            return response() ->json(['message' => 'Invalid Password'], 401);
+        }
+
+        if (!Auth::guard('member')->attempt($loginData)) {
             return response() ->json(['message' => 'Invalid Credentials'], 401);
         }
 
-        $accessToken = auth()->user()->createToken('authToken')->accessToken;
-        return response(['user' => auth()->user(), 'token' => $accessToken]);
+        return response()->json(Auth::guard('member')->user()->createToken($request->email), 200);
+
+        $accessToken = Auth::guard('member')->user()->createToken('authToken')->accessToken;
+
+        return response(['user' => $user, 'token' => $accessToken]);
     }
 
     public function register(Request $request)

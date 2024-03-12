@@ -17,7 +17,7 @@ class ListVisaNationalityResource extends ResourceCollection
             if ($data->image != '') {
                 $image = url('storage/app/public/images/visa', $data->image);
             } else {
-                $image = '';
+                $image = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
             }
 
             if ($data->header_image != '') {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Api\ApiController;
-// use App\Http\Resources\Visa\NationalityResource;
 use App\Http\Resources\Visa\NationalityTypeFormResource;
 use App\Http\Resources\Visa\NationalityTypeResource;
 use App\Http\Resources\Visa\ListVisaNationalityResource;
@@ -41,13 +40,13 @@ class VisaUaeController extends ApiController
 
             return new ListVisaNationalityResource(VisaUaeNationality::paginate(10));
 
-            return response()->json([
-                "success" => true,
-                "message" => "",
-                "data" => new ListVisaNationalityResource($query),
-                "total" => 1,
-                "status" => 200
-            ]);
+            // return response()->json([
+            //     "success" => true,
+            //     "message" => "",
+            //     "data" => new ListVisaNationalityResource($query),
+            //     "total" => 1,
+            //     "status" => 200
+            // ]);
         } catch (\Exception $e) {
             throw $e;
         }

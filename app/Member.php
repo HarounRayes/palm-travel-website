@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens;
+
 
 class Member extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     protected $guard = 'member';
 
@@ -21,6 +23,7 @@ class Member extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     public function favorites(){
         return $this->hasMany(Favorite::class ,'member_id' , 'id');
     }
