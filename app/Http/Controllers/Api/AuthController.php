@@ -46,11 +46,9 @@ class AuthController extends Controller
             return response() ->json(['message' => 'Invalid Credentials'], 401);
         }
 
-        return response()->json(Auth::guard('member')->user()->createToken($request->email), 200);
+        $token = Auth::guard('member')->user()->createToken('authToken')->accessToken;
 
-        $accessToken = Auth::guard('member')->user()->createToken('authToken')->accessToken;
-
-        return response(['user' => $user, 'token' => $accessToken]);
+        return response(['user' => $user, 'token' => $token]);
     }
 
     public function register(Request $request)
@@ -59,7 +57,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:55'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
         if ($validatedData->fails()) {
             $data = [
@@ -75,7 +73,8 @@ class AuthController extends Controller
         $request['password'] = Hash::make($request->password);
 
         $user = Member::create($request->all());
-        $token = $user->createToken('API Token')->accessToken;
+
+        $token = $user->createToken($request->email)->accessToken;
 
         return response(['user' => $user, 'token' => $token]);
     }
