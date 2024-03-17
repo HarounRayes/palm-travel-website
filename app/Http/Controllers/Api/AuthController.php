@@ -46,7 +46,7 @@ class AuthController extends Controller
             return response() ->json(['message' => 'Invalid Credentials'], 401);
         }
 
-        $token = Auth::guard('member')->user()->createToken('authToken')->accessToken;
+        $token = Auth::guard('member')->user()->createToken($user->email)->accessToken;
 
         return response(['user' => $user, 'token' => $token]);
     }
@@ -74,9 +74,18 @@ class AuthController extends Controller
 
         $user = Member::create($request->all());
 
-        $token = $user->createToken($request->email)->accessToken;
+        $token = $user->createToken($user->email)->accessToken;
 
         return response(['user' => $user, 'token' => $token]);
+    }
+
+    public function info(){
+        
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+        return response()->json($user, 200);
     }
 
 }

@@ -22,7 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'language_api'], function () {
 
     Route::get('/home/data', 'Api\HomeController@getHomeData');
-    
 
     Route::get('/sliders', 'Api\HomeController@get_sliders');
     Route::get('/services', 'Api\HomeController@get_services');
@@ -38,21 +37,19 @@ Route::group(['middleware' => 'language_api'], function () {
         Route::post('/refresh_token', 'Api\AuthController@refresh');
         Route::post('/device_token', 'Api\AuthController@saveDeviceToken')->middleware('auth:api');
         Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
-
-        Route::get('/user', 'Api\AuthController@info')->middleware('auth:api');
+        Route::get('/user-info', 'Api\AuthController@info')->middleware('auth:api');
         Route::post('/verify', 'Api\AuthController@verify')->middleware('auth:api');
         Route::get('/re-send-code', 'Api\AuthController@re_send')->middleware('auth:api');
         Route::post('/password/forgot', 'Api\AuthController@forgotPassword');
         Route::post('/password/reset', 'Api\AuthController@resetPassword');
         Route::post('/password/change', 'Api\AuthController@changePassword');
         Route::post('/update/phone', 'Api\AuthController@phone_update');
-
     });
+
     Route::prefix('countries')->group(function () {
         Route::get('/', 'Api\CountryController@index');
         Route::get('/{id}', 'Api\CountryController@view');
     });
-
 
     Route::prefix('blogs')->group(function () {
         Route::get('/', 'Api\BlogController@index');
@@ -60,7 +57,6 @@ Route::group(['middleware' => 'language_api'], function () {
         Route::get('/{id}', 'Api\BlogController@view');
         Route::post('/{id}/comment', 'Api\BlogController@add_comment')->name('add_comment');
     });
-
 
     Route::prefix('packages')->group(function () {
         Route::get('/', 'Api\PackageController@index');
@@ -84,6 +80,7 @@ Route::group(['middleware' => 'language_api'], function () {
             Route::get('/get-visa-form', 'Api\VisaUaeController@get_visa_form');
         });
     });
+
     Route::prefix('static-data')->group(function () {
         Route::get('/general-info', 'Api\StaticController@general_info');
     });
