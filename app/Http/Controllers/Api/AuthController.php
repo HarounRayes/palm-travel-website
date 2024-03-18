@@ -88,4 +88,49 @@ class AuthController extends Controller
         return response()->json($user, 200);
     }
 
+    public function changePasswordPassword(Request $request)
+    {        
+        $validatedData = Validator::make($request->all(), [
+            'old' => 'required',
+            'new' => 'required|min:8|max:64',
+            'renew' => 'required|same:new',
+        ]);
+    
+        
+        if ($validatedData->fails()) {
+            $data = [
+                'success' => false,
+                "message" => trans('exception.Validation-Error'),
+                'data' => $validatedData->errors(),
+                "status" => 422
+            ];
+            throw new HttpResponseException(response()->json(
+                $data, 422),
+            );
+        }
+        
+        $user = Auth::user();
+
+        if (Hash::check($request->old, $user->password) === true) {
+            $user->password = hash::make($request->new);
+            $user->save();
+            return response()->json([
+                "success" => true,
+                "message" => "Password changed successfully",
+                "status" => 200
+            ], 200);
+        } else {
+            return response()->json(
+                $data = [
+                    'success' => false,
+                    "message" => trans('exception.Validation-Error'),
+                    'data' => $validatedData->errors(),
+                    "count" => count($validatedData->errors()),
+                    "status" => 422
+                ], 
+            422);
+        }
+
+    }
+
 }

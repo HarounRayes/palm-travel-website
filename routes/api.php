@@ -41,7 +41,7 @@ Route::group(['middleware' => 'language_api'], function () {
         Route::post('/verify', 'Api\AuthController@verify')->middleware('auth:api');
         Route::get('/re-send-code', 'Api\AuthController@re_send')->middleware('auth:api');
         Route::post('/password/forgot', 'Api\AuthController@forgotPassword');
-        Route::post('/password/reset', 'Api\AuthController@resetPassword');
+        Route::post('/password/reset', 'Api\AuthController@changePasswordPassword')->middleware('auth:api');
         Route::post('/password/change', 'Api\AuthController@changePassword');
         Route::post('/update/phone', 'Api\AuthController@phone_update');
     });
