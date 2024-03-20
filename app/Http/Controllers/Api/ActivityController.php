@@ -9,11 +9,15 @@ use App\ActivityCountry;
 use App\ActivityStep;
 use App\ActivityTour;
 use App\ActivityType;
+use App\ActivityCity;
+use App\GeneralInformation;
+use App\SiteSetting;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Activity\CountryResource;
 use App\Http\Resources\Activity\ListActivityResource;
 use App\Http\Resources\NameResource;
 use App\Http\Resources\Activity\StepResource;
+use App\Http\Resources\Activity\ListActivitiesDetailResource;
 use Illuminate\Http\Request;
 
 class ActivityController extends ApiController
@@ -64,10 +68,44 @@ class ActivityController extends ApiController
         
         try {
             $results = $query->Publish()->paginate(10);
-            return new ListActivityResource($results);
+            return new ListActivitiesDetailResource($results);
         } catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    public function view(Request $request){
+        
+        $model = new ActivityTour();
+
+        if (isset($request->country) && $request->country) {
+            $model = $model->where('activity_country_id', $request->country);
+        }
+
+        if (isset($request->city)){
+            $model = $model->where('activity_city_id', $request->city);
+        }
+
+        if (isset($request->from)) {
+            $date_from = Carbon::createFromTimestamp(strtotime($request->from))->format('Y-m-d');
+        } else {
+            $date_from = 0;
+        }
+
+        if (isset($request->to)) {
+            $date_to = Carbon::createFromTimestamp(strtotime($request->to))->format('Y-m-d');
+        } else {
+            $date_to = 0;
+        }        
+        
+        if ($date_to && $date_from){
+            $period = CarbonPeriod::create($date_from, $date_to);
+        } else {
+            $period = 0;
+        }
+        
+        $activities = $model->Publish()->get();
+        return new ListActivitiesDetailResource($activities);
     }
 
     public function get_steps()
@@ -101,6 +139,7 @@ class ActivityController extends ApiController
             throw $e;
         }
     }
+
     public function get_types()
     {
 
@@ -119,7 +158,6 @@ class ActivityController extends ApiController
 
     public function get_countries()
     {
-
         try {
             return response()->json([
                 "success" => true,
@@ -132,4 +170,17 @@ class ActivityController extends ApiController
             throw $e;
         }
     }
+    
+    public function get_cities_of_country(Request $request)
+    {
+        $cities = ActivityCity::where('activity_country_id', $request->country)->get();
+        return response()->json([
+            "success" => true,
+            "message" => "",
+            "data" => NameResource::collection($cities),
+            "total" => 1,
+            "status" => 200
+        ], 200);
+    }
+
 }

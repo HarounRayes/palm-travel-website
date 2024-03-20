@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
+
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -133,4 +138,39 @@ class AuthController extends Controller
 
     }
 
+
+    // forget password functionality
+    public function forgotPassword(Request $request)
+    {
+        $validatedData = Validator::make($request->all(), [
+            'email' => ['required', 'email', 'max:255'],
+        ]);
+
+        if ($validatedData->fails()) {
+            $data = [
+                'success' => false,
+                "message" => trans('exception.Validation-Error'),
+                'data' => $validatedData->errors(),
+                "status" => 422
+            ];
+            throw new HttpResponseException(response()->json(
+                $data, 422),
+            );
+        }
+        
+
+        $user = Member::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        $token = Str::random(60);
+        DB::table('password_resets')->where('email', $user->email)->update(['token' => $token]);
+        Mail::send('emails.reset-password', ['token' => $token, 'user' => $user], function ($message) use ($user) {
+            $message->to($user->email)->subject('Reset Password');
+        });
+
+        return response()->json(['message' => 'Password reset email sent']);
+    }
 }

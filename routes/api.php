@@ -70,6 +70,7 @@ Route::group(['middleware' => 'language_api'], function () {
         Route::get('/categories', 'Api\ActivityController@get_categories');
         Route::get('/types', 'Api\ActivityController@get_types');
         Route::get('/countries', 'Api\ActivityController@get_countries');
+        Route::get('/cities', 'Api\ActivityController@get_cities_of_country');
     });
 
     Route::prefix('visa')->group(function () {

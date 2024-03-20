@@ -148,6 +148,8 @@ class ActivityController extends Controller
         $types = ActivityType::all();
 //        $period = Carbon
         $whatsapp = SiteSetting::where('name', 'whatsapp_activity')->first();
+
+
         return view('frontend.activity.activities')
             ->with([
                 'activities' => $activities,

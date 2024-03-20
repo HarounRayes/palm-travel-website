@@ -15,7 +15,6 @@ class PackageController extends Controller
 {
     public function index(Request $request)
     {
-
         $query = new Package();
         if (isset($request->country_id) && $request->country_id != '')
             $query->where(['country' => $request->country_id]);

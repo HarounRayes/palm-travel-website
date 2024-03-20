@@ -24,7 +24,7 @@ class PackageFlightResource extends JsonResource
                 if ($segmentF->icon != '') {
                     $icon = url('storage/app/public/package', $segmentF->icon);
                 } else {
-                    $icon = '';
+                    $icon = 'https://cdn-icons-png.flaticon.com/512/3125/3125713.png';
                 }
                 $response['departure_from'] = $this->departure_from;
                 $response['departure_to'] = $this->departure_to;

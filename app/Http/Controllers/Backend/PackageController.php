@@ -50,6 +50,7 @@ class PackageController extends Controller
         if (request()->country) {
             $country = Country::findOrFail(request()->country);
             $packages = Package::where('country', request()->country)->orderBy('id', 'DESC')->get();
+            dd($country, $packages);
             return view('backend.package.index')->with(['packages' => $packages, 'country' => $country]);
         } else {
             $countries = Country::orderBy('id', 'DESC')->paginate(20);
@@ -269,7 +270,7 @@ class PackageController extends Controller
                             $dataSegment['flight_ar'] = isset($segments['flight_ar'][$key7]) ? $segments['flight_ar'][$key7] : "";
                             if ($request->has('flights.segments.' . $key5 . '.icon.' . $key7) != null) {
                                 $icon = $segments['icon'][$key7];
-                                $imageName = time() . '.flighticon' . $icon->getClientOriginalExtension();
+                                $imageName = time() . '.flighticon.' . $icon->getClientOriginalExtension();
                                 $icon->storeAs($this->imagePath, $imageName);
                                 $dataSegment['icon'] = $imageName;
                             }

@@ -51,8 +51,7 @@ class HomeController extends ApiController
 
     }
 
-    public function get_sliders()
-    {
+    public function get_sliders(){
         $sliders = Slider::orderBy('id', 'DESC')->get();
         try {
             return response()->json([
@@ -67,8 +66,7 @@ class HomeController extends ApiController
         }
     }
 
-    public function get_partners()
-    {
+    public function get_partners(){
         $sliders = Partner::all();
         try {
             return response()->json([
@@ -83,8 +81,7 @@ class HomeController extends ApiController
         }
     }
 
-    public function get_services()
-    {
+    public function get_services(){
         $sliders = Service::all();
         try {
             return response()->json([
@@ -99,8 +96,7 @@ class HomeController extends ApiController
         }
     }
 
-    public function set_newsletter(Request $request)
-    {
+    public function set_newsletter(Request $request){
         $data = $request->all();
         $validator = Validator::make($data, [
             'email' => 'required|email',
@@ -134,8 +130,7 @@ class HomeController extends ApiController
 
     }
 
-    public function get_home_countries()
-    {
+    public function get_home_countries(){
 //        $packages = Package::pluck('country')->toArray();
         $countries = Country::WhereHas('packagesHome')->where('add_to_home', 1)->orderBy('country_order', 'ASC')->get();
         try {

@@ -19,9 +19,7 @@ class CountryResource extends JsonResource
         $response = [
             'id' => $this->id,
             'name' => $this->name,
-            'cities' => NameResource::collection($this->cities)
         ];
-
         return $response;
     }
 }
