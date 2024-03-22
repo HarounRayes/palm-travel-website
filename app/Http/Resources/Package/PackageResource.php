@@ -6,6 +6,7 @@ namespace App\Http\Resources\Package;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Resources\Package\ListPackageHotelsResource;
 
 class PackageResource extends JsonResource
 {
@@ -57,8 +58,7 @@ class PackageResource extends JsonResource
             'days' => PackageDayResource::collection($this->days),
             'flights' => PackageFlightResource::collection($this->flights),
             'transfers' => PackageTransferResource::collection($this->transfers),
-//            'days' => PackageDayResource::collection($this->days),
-//            'days' => PackageDayResource::collection($this->days),
+            new ListPackageHotelsResource($this->packageHotels),
         ];
 
         return $response;
