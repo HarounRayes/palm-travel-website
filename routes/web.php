@@ -2,6 +2,8 @@
 
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+
+
+Route::get('/clear-cache-admin', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('optimize:clear');
+    // Artisan::call('config:cache');
+ 
+    return "Cache cleared successfully";
+ });
 
 // Admin routes
 Route::prefix('admin')->group(function () {
