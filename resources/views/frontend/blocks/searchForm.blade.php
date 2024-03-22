@@ -15,7 +15,6 @@
                             </select>
                         </div>
                         <div class="col-md-5 margin-bottom-15-xs">
-
                             <select id="basic" class="selectpicker show-tick form-control"
                                   name="month">
                                 <option value="0"> {{trans('messages.Month')}} </option>

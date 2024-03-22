@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Resources\Activity\ActivityCategoryResource;
 
 
 class ListActivityCategoriesResource extends ResourceCollection
@@ -17,6 +18,7 @@ class ListActivityCategoriesResource extends ResourceCollection
             "data" => $this->collection->map(function ($data) {
                 return [
                     "id" => $data->id,
+                    "name" => $data->name,
                     "activity_tour_id"=> $data->activity_tour_id,
                     "activity_category_id" => $data->acos_category_id,
                     "type" => $data->type,

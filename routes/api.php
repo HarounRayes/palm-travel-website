@@ -49,6 +49,8 @@ Route::group(['middleware' => 'language_api'], function () {
     Route::prefix('countries')->group(function () {
         Route::get('/', 'Api\CountryController@index');
         Route::get('/{id}', 'Api\CountryController@view');
+        Route::get('/countries', 'Api\CountryController@get_countries');
+        Route::get('/months', 'Api\CountryController@get_months');
     });
 
     Route::prefix('blogs')->group(function () {
@@ -76,6 +78,7 @@ Route::group(['middleware' => 'language_api'], function () {
     Route::prefix('visa')->group(function () {
         Route::prefix('uae')->group(function () {
             Route::get('/types', 'Api\VisaUaeController@get_types');
+            Route::get('/countries', 'Api\VisaUaeController@get_countries');
             Route::get('/nationalities', 'Api\VisaUaeController@get_nationalities');
             Route::get('/get-visa-requirements', 'Api\VisaUaeController@get_nationality_requirments');
             Route::get('/get-visa-form', 'Api\VisaUaeController@get_visa_form');

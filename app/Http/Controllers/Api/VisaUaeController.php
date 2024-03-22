@@ -33,6 +33,22 @@ class VisaUaeController extends ApiController
             throw $e;
         }
     }
+
+    public function get_countries()
+    {
+        try {
+            return response()->json([
+                "success" => true,
+                "message" => "",
+                "data" => new ListVisaNationalityResource(VisaUaeNationality::all()),
+                "total" => 1,
+                "status" => 200
+            ]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+    
     public function get_nationalities()
     {
         // $query = ;
@@ -79,8 +95,6 @@ class VisaUaeController extends ApiController
             ->where('visa_uae_nationality_id', $request->nationality_id)
             ->first();
         
-        return response()->json($visa_uae_nationality_types, 200);
-
         return response()->json([
             "success" => true,
             "message" => "",
@@ -89,6 +103,7 @@ class VisaUaeController extends ApiController
             "status" => 200
         ]);
     }
+
     public function get_visa_form(Request $request)
     {
 

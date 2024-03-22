@@ -23,7 +23,7 @@ class ListVisaNationalityResource extends ResourceCollection
             if ($data->header_image != '') {
                 $header_image = url('storage/app/public/images/visa', $data->header_image);
             } else {
-                $header_image = '';
+                $header_image = 'https://welcome.palmoasistravel.com/storage/app/public/images/info/1667197062.visainfoheaderimagear4.jpg';
             }
             
             return [

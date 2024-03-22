@@ -43,4 +43,24 @@ class CountryController extends ApiController
         }
 
     }
+
+    public function get_countries(){
+        try {
+            return response()->json([
+                "success" => true,
+                "message" => "",
+                "data" => CountryResource::collection(Country::all()),
+                "total" => 1,
+                "status" => 200
+            ]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function get_months(){
+        return 'zdf';
+
+        return config('constans.months.'.app()->getLocale());
+    }
 }

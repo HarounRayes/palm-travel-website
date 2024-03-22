@@ -85,7 +85,6 @@ class AuthController extends Controller
     }
 
     public function info(){
-        
         $user = Auth::user();
         if (!$user) {
             return response()->json(['message' => 'User not authenticated'], 401);

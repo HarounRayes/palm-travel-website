@@ -16,27 +16,18 @@ class PackageController extends Controller
     public function index(Request $request)
     {
         $query = new Package();
-        if (isset($request->country_id) && $request->country_id != '')
-            $query->where(['country' => $request->country_id]);
 
-        if (isset($request->month) && $request->month != '')
+        if (isset($request->month) && $request->month != '' && $request->month != '0' && $request->month != 'Month') {
             $query->whereMonth('publish_date', '<=', $request->month)
-                ->WhereMonth('suppress_date', '>=', $request->month);
-
-        if (isset($request->type) && $request->type != '') {
-            $query->whereHas('types', function ($query) use ($request) {
-                $query->whereIn('type_id', $request->type);
-            });
-        }
-
-        if (isset($request->offer) && $request->offer != '') {
-            $query->whereHas('offers', function ($query) use ($request) {
-                $query->whereIn('offer_id', $request->offer);
-            });
+            ->WhereMonth('suppress_date', '>=', $request->month);
         }
 
         try {
-            $results = $query->whereHas('packageHotels')->Active()->NotDraft()->Publish()->orderBy('packages.package_order', 'ASC')->paginate(10);
+            $results = $query->whereHas('packageHotels')
+            ->where('country', $request->country_id)
+            ->Active()->NotDraft()->Publish()
+            ->orderBy('packages.package_order', 'ASC')
+            ->paginate(10);
             return new ListPackageResource($results);
 
         } catch (\Exception $e) {
