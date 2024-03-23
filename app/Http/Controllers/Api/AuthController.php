@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
+use App\Http\Resources\User\UserResource;
+
 
 class AuthController extends Controller
 {
@@ -89,7 +91,15 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not authenticated'], 401);
         }
-        return response()->json($user, 200);
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "",
+                "data" => new UserResource($user),
+                "total" => 1,
+                "status" => 200
+            ],
+        200);
     }
 
     public function changePasswordPassword(Request $request)
