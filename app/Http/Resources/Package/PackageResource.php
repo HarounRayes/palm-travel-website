@@ -6,11 +6,13 @@ namespace App\Http\Resources\Package;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Http\Resources\Package\ListPackageHotelsResource;
+use App\Http\Resources\Package\PackageHotelsResource;
+
+use App\Hotel;
 
 class PackageResource extends JsonResource
 {
-
+    
     /**
      * Transform the resource into an array.
      *
@@ -24,16 +26,19 @@ class PackageResource extends JsonResource
         } else {
             $header_image = '';
         }
+
         if ($this->pdf != '') {
             $pdf = url('storage/app/public/pdf', $this->pdf);
         } else {
             $pdf = '';
         }
+
         if ($this->map != '') {
             $map = url('storage/app/public/images/package', $this->map);
         } else {
             $map = '';
         }
+
         $response = [
             'id' => $this->id,
             'symbol' => $this->symbol,
@@ -58,7 +63,7 @@ class PackageResource extends JsonResource
             'days' => PackageDayResource::collection($this->days),
             'flights' => PackageFlightResource::collection($this->flights),
             'transfers' => PackageTransferResource::collection($this->transfers),
-            new ListPackageHotelsResource($this->packageHotels),
+            'hotels' => new PackageHotelsResource(Hotel::where('symbol', $this->defaultHotel()->symbol)->get()),
         ];
 
         return $response;

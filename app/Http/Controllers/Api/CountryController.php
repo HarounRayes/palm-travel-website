@@ -45,6 +45,7 @@ class CountryController extends ApiController
     }
 
     public function get_countries(){
+        
         try {
             return response()->json([
                 "success" => true,
@@ -59,8 +60,6 @@ class CountryController extends ApiController
     }
 
     public function get_months(){
-        return 'zdf';
-
         return config('constans.months.'.app()->getLocale());
     }
 }

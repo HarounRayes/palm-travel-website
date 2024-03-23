@@ -46,11 +46,12 @@ Route::group(['middleware' => 'language_api'], function () {
         Route::post('/update/phone', 'Api\AuthController@phone_update');
     });
 
+    Route::get('/countries/countries', 'Api\CountryController@get_countries');
+    Route::get('/countries/months', 'Api\CountryController@get_months');
+
     Route::prefix('countries')->group(function () {
         Route::get('/', 'Api\CountryController@index');
         Route::get('/{id}', 'Api\CountryController@view');
-        Route::get('/countries', 'Api\CountryController@get_countries');
-        Route::get('/months', 'Api\CountryController@get_months');
     });
 
     Route::prefix('blogs')->group(function () {
