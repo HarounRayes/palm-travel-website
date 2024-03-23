@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Country;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Resources\Country\CountryResource;
+use App\Http\Resources\Country\PackageCountryResource;
 use App\Http\Resources\Country\ListCountryResource;
 use App\Package;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class CountryController extends ApiController
             return response()->json([
                 "success" => true,
                 "message" => "",
-                "data" => CountryResource::collection(Country::all()),
+                "data" => PackageCountryResource::collection(Country::all()),
                 "total" => 1,
                 "status" => 200
             ]);

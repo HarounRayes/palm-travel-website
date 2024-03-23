@@ -21,18 +21,18 @@ class CountryResource extends JsonResource
         if ($this->image != '') {
             $image = url('storage/app/public/images/country', $this->image);
         } else {
-            $image = '';
+            $image = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
         }
         if ($this->header_image != '') {
             $header_image = url('storage/app/public/images/country', $this->header_image);
 
         } else {
-            $header_image = '';
+            $header_image = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
         }
         if ($this->flag != '' ) {
             $flag = url('storage/app/public/images/country', $this->flag);
         } else {
-            $flag = '';
+            $flag = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
         }
         $response = [
             'id' => $this->id,
