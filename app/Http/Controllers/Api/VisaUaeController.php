@@ -99,6 +99,7 @@ class VisaUaeController extends ApiController
             "success" => true,
             "message" => "",
             "data" => new NationalityTypeResource($visa_uae_nationality_types),
+            "csrf_token" => csrf_token(),
             "total" => 1,
             "status" => 200
         ]);

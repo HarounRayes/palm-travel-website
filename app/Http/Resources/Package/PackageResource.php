@@ -9,6 +9,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Resources\Package\PackageHotelsResource;
 
 use App\Hotel;
+use App\PackageSlider;
+use App\PackageHotel;
+use App\PackageHotelPricingDetail;
 
 class PackageResource extends JsonResource
 {
@@ -39,6 +42,10 @@ class PackageResource extends JsonResource
             $map = '';
         }
 
+        $hotelPricings = PackageHotelPricingDetail::where('package_hotel_id', (
+            PackageHotel::where('package_id', $this->id)->where('hotel_id', $this->defaultHotel()->id)->firstOrFail()->id
+        ))->get();
+
         $response = [
             'id' => $this->id,
             'symbol' => $this->symbol,
@@ -64,6 +71,7 @@ class PackageResource extends JsonResource
             'flights' => PackageFlightResource::collection($this->flights),
             'transfers' => PackageTransferResource::collection($this->transfers),
             'hotels' => new PackageHotelsResource(Hotel::where('symbol', $this->defaultHotel()->symbol)->get()),
+            'hotels_pricing' => ListPackageHotelPricingResource::collection($hotelPricings),
         ];
 
         return $response;
