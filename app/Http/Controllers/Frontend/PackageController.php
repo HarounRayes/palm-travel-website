@@ -92,7 +92,6 @@ class PackageController extends Controller
 
     public function add_order(Request $request)
     {
-
         $items = [];
         $dataIn = $request->all();
         $dataIn['complete'] = 1;

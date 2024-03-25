@@ -44,6 +44,11 @@ Route::group(['middleware' => 'language_api'], function () {
         Route::post('/password/reset', 'Api\AuthController@changePasswordPassword')->middleware('auth:api');
         Route::post('/password/change', 'Api\AuthController@changePassword');
         Route::post('/update/phone', 'Api\AuthController@phone_update');
+
+        Route::get('/favorites', 'Api\AuthController@get_favourites')->middleware('auth:api');
+        Route::get('/enquiries', 'Api\AuthController@get_enquiries')->middleware('auth:api');
+        Route::get('/delete/favorite/{id}', 'Api\AuthController@delete_favorite')->middleware('auth:api');
+        Route::get('/delete/enquiry/{id}', 'Api\AuthController@delete_enquiry')->middleware('auth:api');
     });
 
     Route::get('/countries/countries', 'Api\CountryController@get_countries');

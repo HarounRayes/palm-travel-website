@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Member;
 use App\User;
+use App\Favorite;
+use App\Enquiry;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +18,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\FavoritesResource;
+use App\Http\Resources\User\EnquiriesResource;
 
 
 class AuthController extends Controller
@@ -100,6 +104,63 @@ class AuthController extends Controller
                 "status" => 200
             ],
         200);
+    }
+
+    public function get_favourites() {
+        $favorites = Favorite::where('member_id', Auth::id())->get();
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "",
+                "data" => FavoritesResource::collection($favorites),
+                "total" => count($favorites),
+                "status" => 200
+            ],
+        200);
+    }
+
+    public function delete_favorite($id){
+        $favorites = Favorite::where('member_id', Auth::id())
+        ->where('id', $id)
+        ->firstOrFail();
+
+        $favorites->delete();
+        return response()->json(
+            [
+                "success" => true,
+                "message" => 'Package has been successfully removed from favorites list.',
+                "status" => 200,
+            ], 200
+        );
+    }
+
+    public function get_enquiries() {
+        $enquiries = Enquiry::where('member_id', Auth::id())->get();
+
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "",
+                "data" => EnquiriesResource::collection($enquiries),
+                "total" => count($enquiries),
+                "status" => 200
+            ],
+        200);
+    }
+
+    public function delete_enquiry($id){
+        $enquiry = Enquiry::where('member_id', Auth::id())
+        ->where('id', $id)
+        ->firstOrFail();
+
+        $enquiry->delete();
+        return response()->json(
+            [
+                "success" => true,
+                "message" => 'Enquiry has been successfully removed from the list.',
+                "status" => 200,
+            ], 200
+        );
     }
 
     public function changePasswordPassword(Request $request)
