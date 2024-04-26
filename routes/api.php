@@ -69,6 +69,7 @@ Route::group(['middleware' => 'language_api'], function () {
     Route::prefix('packages')->group(function () {
         Route::get('/', 'Api\PackageController@index');
         Route::get('/view', 'Api\PackageController@view');
+        Route::post('/send-enquiry', 'Api\PackageController@sendEnquiry');
     });
 
     Route::prefix('activities')->group(function () {
@@ -88,6 +89,7 @@ Route::group(['middleware' => 'language_api'], function () {
             Route::get('/nationalities', 'Api\VisaUaeController@get_nationalities');
             Route::get('/get-visa-requirements', 'Api\VisaUaeController@get_nationality_requirments');
             Route::get('/get-visa-form', 'Api\VisaUaeController@get_visa_form');
+            Route::post('/form-save', 'Api\VisaUaeController@uaeApplicationSave');
         });
     });
 

@@ -30,6 +30,7 @@ class ListVisaNationalityResource extends ResourceCollection
                 'id' => $data->id,
                 'name' => $data->name,
                 'text' => $data->text,
+                'symbol' => $data->symbol,
                 'header_image' => $header_image,
                 'image' => $image,
             ];

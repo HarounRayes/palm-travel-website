@@ -131,6 +131,7 @@ class VisaUaeController extends Controller
 
     public function uaeApplicationSave(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'g-recaptcha-response' => 'required|recaptchav3:uaevisa,0.5'
         ]);

@@ -23,6 +23,7 @@ class TypeResource extends JsonResource
         $response = [
             'id' => $this->id,
             'name' => $this->name,
+            'symbol' => $this->symbol,
             'image' => $image,
         ];
 

@@ -41,7 +41,6 @@ class AjaxController extends Controller
 
     public function enquiry(Request $request)
     {
-
         $tours = OrderTour::where('session_id', Session::getId())->get();
 
         if (isset($request->form)) {
@@ -98,6 +97,7 @@ class AjaxController extends Controller
                 }
             }
         }
+
         $package = Package::findOrFail($form['package_id']);
 
         return response()->json(['data' => view('frontend.ajax.enquiry',
