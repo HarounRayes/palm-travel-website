@@ -37,9 +37,9 @@ class HomeController extends ApiController
 
             return  $this->respondWithSuccess(
                 [
-                    'silders' => $sliders,
-                    'partners' => $partners,
-                    'services' => $services,
+                    'silders' => SliderResources::collection($sliders),
+                    'partners' => PartnerResources::collection($partners),
+                    'services' => ServiceResources::collection($services),
                     'countries' => new ListCountryResource($countries),
                 ],
                 "Data is returned successfully", 
