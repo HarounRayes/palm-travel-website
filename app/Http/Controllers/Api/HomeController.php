@@ -48,7 +48,6 @@ class HomeController extends ApiController
         } catch (\Throwable $th) {
             throw $th;
         }
-
     }
 
     public function get_sliders(){
